@@ -18,8 +18,10 @@ if [ ! -e $2 ] ; then
     creatMd5file $1 $2
 fi
 
-while(true) ; do
+while true 
+do
     # 检测文件是否修改，$?返回1 表示修改, 0表示未修改
+    creatMd5file $1 $2
     md5sum -c $2 --status
 
     if [ $? -gt 0 ] ; then
