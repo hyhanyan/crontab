@@ -17,17 +17,24 @@ function creatMd5file()
 if [ ! -e $2 ] ; then
     creatMd5file $1 $2
 fi
+if [ ! -e $4 ] ; then
+    creatMd5file $3 $4
+fi
 
-while true 
-do
+while(true) ; do
     # 检测文件是否修改，$?返回1 表示修改, 0表示未修改
-    creatMd5file $1 $2
     md5sum -c $2 --status
 
     if [ $? -gt 0 ] ; then
-        sh new_info_v2.sh > log/hy.log
+        echo "pid sunccess";
         creatMd5file $1 $2
+    fi
+    
+    md5sum -c $4 --status
 
+    if [ $? -gt 0 ] ; then
+        echo "ts sunccess";
+        creatMd5file $3 $4
     fi
     # 每过3秒检测一次
     sleep 3
